@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kusuma Uppalapati | Backend, Systems &amp; AI Agents</title>
+<meta name="description" content="Portfolio of Kusuma Uppalapati: a CSE student who loves understanding how systems work, building backend projects, and putting AI agents to work. Tap the train to find the secret ride.">
+<style>
+:root{--ink:#3a1d2e;--navy:#0b2545;--muted:#7a4a62;--card:rgba(255,255,255,.93);--line:rgba(194,37,92,.22);--accent:#c2255c;--accent2:#e0527a;--ok:#15803d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:#fff3f7;font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body.lock{overflow:hidden}
+a{color:var(--accent)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden}
+.pt{position:absolute;top:-30px;border-radius:70% 0 70% 0;background:linear-gradient(135deg,#ffd6e2,#f38fb0);opacity:.92;animation:pfall linear infinite}
+@keyframes pfall{0%{transform:translate3d(0,-5vh,0) rotate(0)}50%{transform:translate3d(60px,55vh,0) rotate(220deg)}100%{transform:translate3d(-30px,110vh,0) rotate(420deg)}}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:100;background:linear-gradient(#bfe3fa,#ffe3ec 70%,#fff3f7);cursor:pointer;animation:introOut .9s ease 2.4s forwards}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+#introLeaf{position:absolute;left:0;top:0;width:96px;height:96px;opacity:0;animation:leafFall 2.7s ease-in-out forwards}
+@keyframes leafFall{0%{transform:translate(10vw,-20vh) rotate(-40deg);opacity:0}10%{opacity:1}30%{transform:translate(35vw,15vh) rotate(30deg)}55%{transform:translate(55vw,40vh) rotate(-25deg)}80%{transform:translate(45vw,62vh) rotate(40deg);opacity:1}100%{transform:translate(50vw,80vh) rotate(10deg);opacity:0}}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{max-width:1000px;margin:auto;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.logo{font-weight:700;text-decoration:none;color:var(--ink)}
+nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:.93rem}
+nav a:hover{color:var(--accent)}
+#secret{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--accent2);color:var(--accent);padding:5px 13px;border-radius:999px;cursor:pointer;font:700 .9rem system-ui,sans-serif}
+#secret:hover{background:var(--accent);color:#fff}
+
+/* hero */
+.skytop{position:relative;background:linear-gradient(180deg,#4aa8ec 0%,#7cc3f2 55%,#b9dff8 100%);overflow:hidden}
+.skyclouds{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.wrap{position:relative;z-index:2;max-width:1000px;margin:auto;padding:48px 16px 26px}
+.hello{margin:0 0 6px;color:var(--navy);font-size:1.15rem;font-weight:700}
+.name{font-size:clamp(2.2rem,8vw,4.4rem);line-height:1.1;margin:0 0 18px;min-height:1.2em;color:var(--navy);text-shadow:0 2px 0 rgba(255,255,255,.45)}
+.caret{display:inline-block;width:.07em;height:.9em;margin-left:4px;background:var(--navy);vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{max-width:720px;margin:0;font-size:clamp(1.05rem,2.6vw,1.28rem);line-height:1.7;color:var(--ink);background:rgba(255,255,255,.82);padding:16px 20px;border-radius:14px;border-left:5px solid var(--accent2)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+.scene{display:block;width:100%;height:clamp(330px,44vw,570px)}
+.trainBtn{cursor:pointer}
+.trainBtn:focus-visible{outline:4px solid #1d4ed8;outline-offset:-4px}
+.heroTrain{transition:transform .85s cubic-bezier(.5,0,.9,.4)}
+body.depart .heroTrain{transform:translateX(1000px)}
+.hintbubble{animation:bob 1.6s ease-in-out infinite alternate}
+body.depart .hintbubble{opacity:0;transition:opacity .3s}
+@keyframes bob{to{transform:translateY(-8px)}}
+.ripple{transform-box:fill-box;transform-origin:center;animation:ripple 2s ease-out infinite}
+.ripple.r2{animation-delay:1s}
+@keyframes ripple{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.trainBtn:hover .hintbubble{animation-duration:.8s}
+.lamp{animation:lamp 1s steps(1) infinite}
+.lamp.l2{animation-delay:-.5s}
+@keyframes lamp{0%{opacity:1}50%{opacity:.2}}
+
+/* page body */
+.below{background:linear-gradient(180deg,#7fc476 0,#bfe6a8 70px,#fff3f7 240px)}
+main{max-width:1000px;margin:auto;padding:0 16px}
+section{padding:52px 0 8px}
+h2{font-size:1.7rem;margin:0 0 20px}
+h2::before{content:"// ";color:var(--accent);font-family:ui-monospace,Menlo,monospace}
+.panelbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:0 6px 24px rgba(194,37,92,.10)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{margin:0 0 6px;font-size:1.1rem}
+.card p{margin:0 0 10px;color:var(--muted);font-size:.97rem}
+.tag{display:inline-block;font-size:.78rem;padding:2px 9px;margin:2px 4px 2px 0;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:#fff}
+.flag{border:2px solid var(--accent2);padding:26px}
+.flag .badge{display:inline-block;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:999px;margin-bottom:10px}
+.flag h3{font-size:1.7rem;margin:0 0 10px}
+.flag p{font-size:1.05rem;color:var(--ink)}
+.status{list-style:none;padding:0;margin:14px 0 18px;display:grid;gap:6px}
+.status b{display:inline-block;min-width:118px}
+.s-live{color:var(--ok)}.s-wip{color:#b45309}.s-plan{color:var(--muted)}
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;border:2px solid var(--accent);text-decoration:none;color:var(--accent);background:#fff;font-weight:700}
+.btn:hover{background:var(--accent);color:#fff}
+.sub-h{margin:26px 0 12px;font-size:1.05rem;color:var(--muted)}
+.skills{display:flex;flex-wrap:wrap;gap:10px}
+.skill{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.skill b{color:var(--accent)}
+ul.clean{padding-left:20px;margin:0}
+ul.clean li{margin-bottom:8px}
+footer{max-width:1000px;margin:60px auto 0;padding:20px 16px 60px;color:var(--muted);font-size:.9rem;text-align:center}
+
+/* the ride */
+.ride{position:fixed;inset:0;z-index:80;display:none;opacity:0;transition:opacity .6s ease;overflow:hidden;background:#4aa8ec}
+.ride.open{display:block}
+.ride.show{opacity:1}
+.sky{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.sky.day{background:linear-gradient(#4aa8ec,#a9d8f6 60%,#eaf6fd)}
+.sky.dusk{background:linear-gradient(#6f84d2,#f6a9c4 62%,#ffd9b4)}
+.sky.night{background:linear-gradient(#18244f,#47498c 62%,#c98db7)}
+.ride[data-sky=day] .day,.ride[data-sky=dusk] .dusk,.ride[data-sky=night] .night{opacity:1}
+.rscene{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.tint{position:absolute;inset:0;z-index:2;pointer-events:none;transition:background-color 1.6s}
+.ride[data-sky=dusk] .tint{background:rgba(255,140,120,.16)}
+.ride[data-sky=night] .tint{background:rgba(25,25,90,.38)}
+.alarm{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;box-shadow:inset 0 0 150px 30px rgba(255,50,90,.6)}
+.ride.alarmOn .alarm{animation:flash 1.1s infinite}
+@keyframes flash{50%{opacity:1}}
+.rp{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.stars,.moon,.beam{opacity:0;transition:opacity 1.6s}
+.ride[data-sky=night] .stars,.ride[data-sky=night] .moon{opacity:1}
+.ride[data-sky=night] .beam{opacity:.4}
+.lay{will-change:transform}
+.l-far{animation:slide 90s linear infinite}
+.l-mid{animation:slide 40s linear infinite}
+.l-near{animation:slide 16s linear infinite}
+@keyframes slide{to{transform:translateX(-1440px)}}
+.sleep{animation:dash .5s linear infinite}
+@keyframes dash{to{stroke-dashoffset:44}}
+.tbob{animation:tbob .5s ease-in-out infinite alternate}
+@keyframes tbob{to{transform:translateY(-2px)}}
+.ride.paused .lay,.ride.paused .sleep,.ride.paused .tbob{animation-play-state:paused}
+.panel{position:absolute;z-index:6;left:50%;top:62px;transform:translateX(-50%);width:min(680px,calc(100% - 28px));max-height:min(54vh,470px);overflow:auto;background:rgba(255,255,255,.95);border:2px solid #f4a2ba;border-radius:20px;padding:20px 22px;box-shadow:0 14px 40px rgba(60,20,50,.28)}
+.panel:focus{outline:none}
+.prog{display:flex;gap:6px;margin-bottom:8px}
+.prog span{width:26px;height:6px;border-radius:3px;background:#f6d3dd}
+.prog span.on{background:var(--accent)}
+.kick{margin:0 0 4px;font-size:.85rem;letter-spacing:.1em;color:var(--accent);font-weight:700}
+.panel h2{margin:0 0 10px;font-size:clamp(1.4rem,4.5vw,2rem);line-height:1.2}
+.panel h2::before{content:none}
+.pbody{font-size:1.08rem;line-height:1.6}
+.pbody p{margin:0 0 10px}
+.st{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:4px;font-size:1rem}
+.st b{display:inline-block;min-width:104px}
+.live{color:var(--ok)}.wip{color:#b45309}.plan{color:var(--muted)}
+.chips span{display:inline-block;margin:2px 6px 2px 0;padding:3px 12px;border-radius:999px;background:#ffe3ec;color:#7a1f45;font-size:.92rem;font-weight:600}
+.note{font-weight:700;color:#7a1f45;background:#fde68a;border-radius:10px;padding:8px 12px}
+#dlog{background:#2a1530;color:#ffe9f1;border-radius:12px;padding:10px 12px;font-size:.95rem;line-height:1.6;min-height:120px}
+#dlog .e{color:#fca5a5}#dlog .i{color:#93c5fd}#dlog .o{color:#86efac}#dlog .w{color:#fcd34d}
+.pact{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pb{font:700 1.05rem system-ui,sans-serif;padding:12px 22px;min-height:48px;border-radius:12px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.pb:hover{background:#9d174d}
+.pb.alt{background:#fff;color:var(--accent)}
+.pb.alt:hover{background:#ffe3ec}
+.pb.go{background:#15803d;border-color:#15803d}
+#rideClose{position:absolute;z-index:7;top:10px;right:10px;font:700 .95rem system-ui,sans-serif;padding:9px 16px;border-radius:999px;border:2px solid #fff;background:rgba(58,29,46,.85);color:#fff;cursor:pointer}
+:focus-visible{outline:3px solid #1d4ed8;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.pt,.hintbubble,.ripple,.lamp,.caret,.lay,.sleep,.tbob{animation:none}.ripple{opacity:.5}html{scroll-behavior:auto}.reveal{transition:none}#intro{display:none}.heroTrain{transition:none}.ride.alarmOn .alarm{animation:none;opacity:.7}}
+</style>
+<noscript><style>#intro{display:none}.reveal{opacity:1!important;transform:none!important}body.lock{overflow:auto}</style></noscript>
+</head>
+<body class="lock">
+
+<!-- shared art (all original illustration) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9dff8"/><stop offset="1" stop-color="#eaf6fd"/></linearGradient>
+  <linearGradient id="gGrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bde69f"/><stop offset="1" stop-color="#7fc476"/></linearGradient>
+  <linearGradient id="gRoad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d6c88"/><stop offset="1" stop-color="#8795ae"/></linearGradient>
+
+  <g id="cloud">
+    <ellipse cx="0" cy="0" rx="172" ry="24" fill="#cfe3f4"/>
+    <g fill="#fff"><circle cx="-92" cy="-14" r="46"/><circle cx="-30" cy="-48" r="62"/><circle cx="40" cy="-60" r="70"/><circle cx="112" cy="-30" r="50"/><circle cx="160" cy="-8" r="30"/><circle cx="-142" cy="-4" r="30"/><rect x="-150" y="-32" width="310" height="30"/></g>
+    <ellipse cx="10" cy="-6" rx="135" ry="13" fill="#e4f0fa" opacity=".85"/>
+  </g>
+
+  <g id="tree">
+    <path d="M-16 0 C-12 -110 -28 -190 -6 -300 L20 -300 C6 -190 26 -110 24 0Z" fill="#5a2d3f"/>
+    <g stroke="#5a2d3f" stroke-linecap="round" fill="none"><path d="M4 -220 C-50 -260 -90 -290 -128 -340" stroke-width="10"/><path d="M10 -240 C70 -280 110 -300 150 -350" stroke-width="10"/><path d="M6 -190 C-30 -215 -55 -235 -80 -245" stroke-width="7"/></g>
+    <g fill="#f4a2ba"><circle cx="0" cy="-350" r="115"/><circle cx="-115" cy="-310" r="80"/><circle cx="125" cy="-320" r="85"/><circle cx="-60" cy="-430" r="88"/><circle cx="75" cy="-440" r="92"/><circle cx="5" cy="-490" r="66"/></g>
+    <g fill="#f9c2d1"><circle cx="-20" cy="-385" r="88"/><circle cx="95" cy="-375" r="62"/><circle cx="-105" cy="-345" r="52"/><circle cx="45" cy="-455" r="58"/><circle cx="-70" cy="-455" r="50"/></g>
+    <g fill="#ffe4ec"><circle cx="-40" cy="-435" r="46"/><circle cx="62" cy="-418" r="36"/><circle cx="-112" cy="-368" r="28"/><circle cx="8" cy="-495" r="34"/><circle cx="110" cy="-350" r="24"/></g>
+    <g fill="#ec88a6"><circle cx="-70" cy="-262" r="32"/><circle cx="62" cy="-252" r="28"/><circle cx="132" cy="-282" r="26"/><circle cx="-132" cy="-292" r="24"/><circle cx="0" cy="-268" r="26"/></g>
+    <g fill="#fff" opacity=".9"><circle cx="-20" cy="-300" r="4"/><circle cx="40" cy="-330" r="3"/><circle cx="-90" cy="-400" r="3.5"/><circle cx="100" cy="-410" r="3"/><circle cx="20" cy="-520" r="3"/></g>
+  </g>
+
+  <g id="pole">
+    <rect x="-6" y="-340" width="12" height="340" fill="#8a6a5c"/><rect x="-6" y="-340" width="4" height="340" fill="#a98776"/>
+    <rect x="-62" y="-332" width="124" height="9" rx="3" fill="#7a5a4e"/><rect x="-46" y="-290" width="92" height="8" rx="3" fill="#7a5a4e"/>
+    <g fill="#e9eef3"><rect x="-58" y="-345" width="7" height="13" rx="2"/><rect x="51" y="-345" width="7" height="13" rx="2"/><rect x="-3" y="-345" width="7" height="13" rx="2"/></g>
+  </g>
+
+  <g id="signal">
+    <rect x="-4" y="-180" width="8" height="180" fill="#4b4f5a"/>
+    <g transform="translate(0 -150)">
+      <rect x="-36" y="-6" width="72" height="12" fill="#fff" stroke="#d83a52" stroke-width="2" transform="rotate(28)"/>
+      <rect x="-36" y="-6" width="72" height="12" fill="#fff" stroke="#d83a52" stroke-width="2" transform="rotate(-28)"/>
+      <rect x="-34" y="26" width="68" height="8" rx="4" fill="#3a3f4c"/>
+      <circle class="lamp" cx="-18" cy="46" r="10" fill="#ff5a6e"/><circle class="lamp l2" cx="18" cy="46" r="10" fill="#ff5a6e"/>
+    </g>
+  </g>
+
+  <g id="train">
+    <rect x="0" y="-128" width="420" height="100" rx="20" fill="#f7f2ea"/>
+    <path d="M0 -52 H420 V-48 Q420 -28 400 -28 H20 Q0 -28 0 -48Z" fill="#2f4b7c"/>
+    <rect x="0" y="-62" width="420" height="9" fill="#f28ba8"/>
+    <rect x="16" y="-140" width="388" height="14" rx="7" fill="#dfe7f0"/>
+    <rect x="90" y="-152" width="70" height="12" rx="4" fill="#c9d3df"/><rect x="250" y="-152" width="70" height="12" rx="4" fill="#c9d3df"/>
+    <path d="M200 -140 L215 -170 L235 -170 L250 -140" stroke="#55606e" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <rect x="203" y="-173" width="44" height="5" rx="2" fill="#55606e"/>
+    <g fill="#bfe3fa" stroke="#8fb6d6" stroke-width="2">
+      <rect x="12" y="-112" width="34" height="46" rx="6"/>
+      <rect x="56" y="-112" width="40" height="46" rx="6"/><rect x="106" y="-112" width="40" height="46" rx="6"/><rect x="156" y="-112" width="40" height="46" rx="6"/>
+      <rect x="206" y="-112" width="40" height="46" rx="6"/><rect x="256" y="-112" width="40" height="46" rx="6"/><rect x="306" y="-112" width="40" height="46" rx="6"/>
+      <rect x="362" y="-112" width="42" height="46" rx="8"/>
+    </g>
+    <g fill="#fff" opacity=".55"><path d="M62 -108 L80 -108 L64 -70 L62 -70Z"/><path d="M112 -108 L130 -108 L114 -70 L112 -70Z"/><path d="M162 -108 L180 -108 L164 -70 L162 -70Z"/><path d="M212 -108 L230 -108 L214 -70 L212 -70Z"/><path d="M262 -108 L280 -108 L264 -70 L262 -70Z"/><path d="M312 -108 L330 -108 L314 -70 L312 -70Z"/><path d="M368 -108 L388 -108 L370 -70 L368 -70Z"/></g>
+    <circle cx="412" cy="-44" r="8" fill="#ffe9a8"/><circle cx="8" cy="-44" r="5" fill="#ff7a8c"/>
+    <text x="316" y="-33" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#fff">KU-447</text>
+    <rect x="40" y="-30" width="340" height="8" fill="#3a3f4c"/>
+    <g fill="#2b2f3a"><circle cx="62" cy="-14" r="14"/><circle cx="102" cy="-14" r="14"/><circle cx="318" cy="-14" r="14"/><circle cx="358" cy="-14" r="14"/></g>
+    <g fill="#8d95a3"><circle cx="62" cy="-14" r="4"/><circle cx="102" cy="-14" r="4"/><circle cx="318" cy="-14" r="4"/><circle cx="358" cy="-14" r="4"/></g>
+  </g>
+</defs>
+</svg>
+
+<div id="petals" aria-hidden="true"></div>
+
+<div id="intro" aria-hidden="true">
+  <svg id="introLeaf" viewBox="0 0 24 32"><path d="M12 1 C21 8 23 18 12 31 C1 18 3 8 12 1Z" fill="#f48fb1"/><path d="M12 5 L12 29" stroke="#c2185b" stroke-width="1" fill="none"/><path d="M12 12 L7 8 M12 17 L6 13 M12 12 L17 8 M12 17 L18 13" stroke="#c2185b" stroke-width=".7" fill="none"/></svg>
+</div>
+
+<div id="page">
+<header>
+  <div class="bar">
+    <a class="logo mono" href="#top">Namaste 👋</a>
+    <button id="secret" type="button" aria-label="Open the secret train ride">🚆 Secret ride</button>
+    <nav aria-label="Primary"><a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#community">Community</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<div class="skytop" id="top">
+  <svg class="skyclouds" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <use href="#cloud" transform="translate(180 300) scale(1.2)" opacity=".9"/>
+    <use href="#cloud" transform="translate(1180 250) scale(1.4)" opacity=".92"/>
+    <use href="#cloud" transform="translate(760 390) scale(.8)" opacity=".8"/>
+  </svg>
+  <div class="wrap">
+    <p class="hello mono"></p>
+    <h1 class="name" aria-label="Kusuma Uppalapati"><span id="typed" aria-hidden="true">Kusuma Uppalapati..!</span><span class="caret" aria-hidden="true"></span></h1>
+    <p class="lead reveal">I just love understanding how systems work: what really happens between a click and a row in a database. That curiosity is how I got locked into backend engineering. Now I'm exploring how AI agents can live inside backend systems, so the boring, repetitive work can take care of itself.</p>
+  </div>
+</div>
+
+<!-- Illustrated scene. The train is the secret. -->
+<svg class="scene" viewBox="0 330 1440 570" preserveAspectRatio="xMidYMax slice">
+  <rect x="0" y="330" width="1440" height="570" fill="url(#gSky)"/>
+  <use href="#cloud" transform="translate(230 560) scale(1.3)"/>
+  <use href="#cloud" transform="translate(1180 530) scale(1.4)"/>
+  <use href="#cloud" transform="translate(790 470) scale(.7)"/>
+  <g fill="#fff" opacity=".85"><ellipse transform="translate(980 400) rotate(-30)" rx="85" ry="9"/><ellipse transform="translate(560 372) rotate(-28)" rx="60" ry="7"/><ellipse transform="translate(1270 372) rotate(-30)" rx="70" ry="8"/></g>
+  <rect y="640" width="1440" height="70" fill="#b7def0"/>
+  <path d="M0 650 Q200 598 400 640 T800 632 T1180 606 T1440 640 V690 H0Z" fill="#92bdd9"/>
+  <path d="M0 668 Q260 636 520 664 T1040 656 T1440 668 V705 H0Z" fill="#a9d4a0"/>
+  <rect y="690" width="1440" height="60" fill="url(#gGrass)"/>
+  <use href="#tree" transform="translate(40 700) scale(.42)"/>
+  <use href="#tree" transform="translate(300 700) scale(.4)"/>
+  <use href="#tree" transform="translate(570 700) scale(.46)"/>
+  <use href="#tree" transform="translate(880 700) scale(.44)"/>
+  <use href="#tree" transform="translate(1130 700) scale(.4)"/>
+  <rect y="735" width="1440" height="5" fill="#5b6472"/>
+  <rect y="740" width="1440" height="35" fill="#cdbfae"/>
+  <path d="M0 757 H1440" stroke="#8a6f66" stroke-width="9" stroke-dasharray="14 30"/>
+  <use href="#pole" transform="translate(110 742)"/><use href="#pole" transform="translate(470 742)"/><use href="#pole" transform="translate(1010 742)"/><use href="#pole" transform="translate(1340 742)"/>
+  <g fill="none" stroke="#5a4650" stroke-width="2.2">
+    <path d="M-20 408 Q45 430 110 410"/>
+    <path d="M110 410 Q290 452 470 410"/><path d="M110 452 Q290 494 470 452"/>
+    <path d="M470 410 Q740 462 1010 410"/><path d="M470 452 Q740 504 1010 452"/>
+    <path d="M1010 410 Q1175 450 1340 410"/><path d="M1010 452 Q1175 492 1340 452"/>
+    <path d="M1340 410 Q1400 430 1460 412"/>
+  </g>
+
+  <!-- the secret -->
+  <g id="trainBtn" class="trainBtn" role="button" tabindex="0" aria-label="Tap the train to start a secret interactive ride through my portfolio">
+    <rect x="470" y="390" width="480" height="355" fill="transparent"/>
+    <ellipse class="ripple" cx="710" cy="670" rx="260" ry="86" fill="none" stroke="#ff6f9c" stroke-width="5"/>
+    <ellipse class="ripple r2" cx="710" cy="670" rx="260" ry="86" fill="none" stroke="#ff6f9c" stroke-width="5"/>
+    <g class="heroTrain"><use href="#train" x="500" y="735"/></g>
+    <g class="hintbubble" transform="translate(710 480)">
+      <path d="M-181 -80 H181 A24 24 0 0 1 205 -56 V-4 A24 24 0 0 1 181 20 H45 L0 56 L-45 20 H-181 A24 24 0 0 1 -205 -4 V-56 A24 24 0 0 1 -181 -80Z" fill="#fff" stroke="#e0527a" stroke-width="4"/>
+      <text text-anchor="middle" y="-30" font-family="system-ui,sans-serif" font-size="31" font-weight="800" fill="#7a1f45">Psst… tap the train 🚆</text>
+      <text text-anchor="middle" y="5" font-family="system-ui,sans-serif" font-size="22" font-weight="600" fill="#8a4a63">something's waiting inside</text>
+    </g>
+  </g>
+
+  <polygon points="0,775 560,775 260,900 0,900" fill="#92d07f"/>
+  <polygon points="880,775 1440,775 1440,900 1180,900" fill="#92d07f"/>
+  <polygon points="560,775 880,775 1180,900 260,900" fill="url(#gRoad)"/>
+  <path d="M572 775 L292 900 M868 775 L1148 900" stroke="#f3c453" stroke-width="6" fill="none"/>
+  <g fill="#fff" opacity=".92"><polygon points="717,785 723,785 723.5,800 716.5,800"/><polygon points="715.5,815 724.5,815 725,842 715,842"/><polygon points="713,862 727,862 728,900 712,900"/></g>
+  <use href="#signal" transform="translate(360 848) scale(1.1)"/><use href="#signal" transform="translate(1080 848) scale(1.1)"/>
+  <g fill="#ffc2d4"><ellipse cx="470" cy="830" rx="8" ry="4" transform="rotate(20 470 830)"/><ellipse cx="640" cy="805" rx="7" ry="3.5"/><ellipse cx="760" cy="842" rx="9" ry="4" transform="rotate(-15 760 842)"/><ellipse cx="900" cy="822" rx="7" ry="3.5" transform="rotate(30 900 822)"/><ellipse cx="560" cy="872" rx="9" ry="4"/><ellipse cx="980" cy="880" rx="8" ry="4" transform="rotate(10 980 880)"/><ellipse cx="690" cy="890" rx="7" ry="3.5"/><ellipse cx="830" cy="795" rx="6" ry="3"/></g>
+  <use href="#tree" transform="translate(150 905)"/>
+  <use href="#tree" transform="translate(1310 905) scale(1.05)"/>
+</svg>
+
+<div class="below">
+<main>
+  <section id="about">
+    <h2>About me</h2>
+    <div class="panelbox">
+      <p style="margin-top:0">I'm a third-year Computer Science student at Sri Vasavi Engineering College, Tadepalligudem. I enjoy the parts of software people don't see: databases, APIs, and what keeps a system standing when many people use it at once.</p>
+      <p>I also like teaching what I learn. I speak and run workshops for other students, because explaining something is the fastest way to understand it properly.</p>
+      <p style="margin-bottom:0"><strong>What's next:</strong> a backend internship where I can build real systems and try agents that automate the repetitive work.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <article class="card flag">
+      <span class="badge mono">MY FLAGSHIP · BUILT FROM SCRATCH</span>
+      <h3>Vasavi Cafeteria</h3>
+      <p>The idea came to me during my first year when I walked all the way to the canteen just to grab some juice, only to find the shop closed. Since it was quite far from my block, I thought, wouldn't it be nice if there was a website where students could check whether a shop is open and if their favourite items are available before heading there? That little thought stayed with me, and in my second year, I finally decided to turn it into a project. I've built the frontend myself, and it's been a fun journey bringing that idea to life!</p>
+      <ul class="status">
+        <li><b class="s-live">● Live</b> Frontend in HTML, CSS and JavaScript, deployed on Vercel</li>
+        <li><b class="s-wip">● In progress</b> Backend with a database for student orders (Spring Boot)</li>
+        <li><b class="s-plan">● Planned</b> Payments</li>
+      </ul>
+      <a class="btn" href="https://github.com/Kusuma447/vasavi-cafeteria-ui" target="_blank" rel="noopener">View the code on GitHub</a>
+      <!-- TODO: add live demo link (Vercel URL) as a second button -->
+    </article>
+
+    <h3 class="sub-h">More things I've built</h3>
+    <div class="grid">
+      <article class="card"><h3>Sentinel</h3><p>An incident-response AI agent built on Hindsight memory, so it learns from past incidents. A human approves every fix. Built for Hack With Hyderabad 3.0.</p><span class="tag">AI agent</span><span class="tag">Memory</span></article>
+      <article class="card"><h3>NLP-to-SQL Chatbot</h3><p>A bilingual English and Kannada chatbot that turns plain-language questions into SQL queries. Built for KSP Datathon 2026 with a teammate.</p><span class="tag">Python</span><span class="tag">PostgreSQL</span></article>
+      <article class="card"><h3>SkillSynth</h3><p>An ATS resume analyzer built with my team .</p><span class="tag">Python</span><span class="tag">JavaScript</span></article>
+      <article class="card"><h3>Email Summarizer</h3><p>Built an AI-powered Email Summarizer that converts long emails into short, easy-to-understand summaries, helping users save time and quickly catch the key points without reading every detail.</p><span class="tag">Web</span><span class="tag">Education</span></article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Tech superpowers</h2>
+    <div class="skills">
+      <div class="skill"><b>Java</b> · core language, DSA practice</div>
+      <div class="skill"><b>Python</b> · scripts, NLP, tooling</div>
+      <div class="skill"><b>SQL + PostgreSQL</b> · schema design, queries</div>
+      <div class="skill"><b>HTML / CSS / JS</b> · front ends that ship</div>
+      <div class="skill"><b>Git + GitHub</b> · team workflow</div>
+      <div class="skill"><b>AWS Amplify</b> · hosting this site</div>
+    </div>
+  </section>
+
+  <section id="community">
+    <h2>Community and leadership</h2>
+    <div class="panelbox">
+      <ul class="clean">
+         <li><strong>AWS Student Builder Campus Leader</strong> represented Aws builder center and helped fellow students to know about aws builder center.</li>
+        <li><strong>GDG On Campus Associate</strong> (since Nov 2025): career counselling speaker for about 50 first-year students.</li>
+        <li><strong>Google Gemini Student Ambassador</strong> (since May 2026): ran 3 hands-on workshops on AI tools for about 20 students.</li>
+        
+       
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="panelbox">
+      <p style="margin:0">Hiring for a backend internship, or want to build something? Find me on <a href="https://linkedin.com/in/kusuma-uppalapati" target="_blank" rel="noopener">LinkedIn</a> or see my code on <a href="https://github.com/Kusuma447" target="_blank" rel="noopener">GitHub</a>.</p>
+    </div>
+  </section>
+</main>
+<footer> © 2026 Kusuma Uppalapati</footer>
+</div>
+</div>
+
+<!-- The secret ride -->
+<div id="ride" class="ride" role="dialog" aria-modal="true" aria-labelledby="rideTitle" data-sky="day">
+  <div class="sky day"></div><div class="sky dusk"></div><div class="sky night"></div>
+  <svg class="rscene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g class="stars" id="stars"></g>
+    <circle class="moon" cx="820" cy="190" r="46" fill="#fff6d6"/>
+    <g class="lay l-far">
+      <g id="farTile">
+        <path d="M0 600 Q180 540 360 590 T720 585 T1080 560 T1440 600 V760 H0Z" fill="#9cc1de"/>
+        <path d="M0 650 Q240 610 480 645 T960 640 T1440 650 V760 H0Z" fill="#a9d4b2"/>
+        <use href="#cloud" transform="translate(240 300) scale(1.2)"/>
+        <use href="#cloud" transform="translate(760 220) scale(.9)"/>
+        <use href="#cloud" transform="translate(1160 350) scale(1.3)"/>
+      </g>
+      <use href="#farTile" x="1440"/>
+    </g>
+    <g class="lay l-mid">
+      <g id="midTile">
+        <use href="#tree" transform="translate(130 706) scale(.5)"/><use href="#tree" transform="translate(430 706) scale(.45)"/><use href="#tree" transform="translate(760 706) scale(.52)"/><use href="#tree" transform="translate(1020 706) scale(.46)"/><use href="#tree" transform="translate(1290 706) scale(.5)"/>
+      </g>
+      <use href="#midTile" x="1440"/>
+    </g>
+    <rect x="0" y="700" width="1440" height="200" fill="url(#gGrass)"/>
+    <g class="lay l-near">
+      <g id="nearTile">
+        <use href="#tree" transform="translate(440 712) scale(.78)"/><use href="#tree" transform="translate(920 712) scale(.8)"/>
+        <use href="#pole" transform="translate(200 712)"/><use href="#pole" transform="translate(680 712)"/><use href="#pole" transform="translate(1160 712)"/>
+        <g fill="none" stroke="#5a4650" stroke-width="2.4">
+          <path d="M-280 384 Q-40 430 200 384"/><path d="M200 384 Q440 430 680 384"/><path d="M680 384 Q920 430 1160 384"/><path d="M1160 384 Q1400 430 1640 384"/>
+          <path d="M-280 422 Q-40 468 200 422"/><path d="M200 422 Q440 468 680 422"/><path d="M680 422 Q920 468 1160 422"/><path d="M1160 422 Q1400 468 1640 422"/>
+        </g>
+      </g>
+      <use href="#nearTile" x="1440"/>
+    </g>
+    <rect x="0" y="735" width="1440" height="5" fill="#5b6472"/>
+    <rect x="0" y="740" width="1440" height="35" fill="#cdbfae"/>
+    <path class="sleep" d="M-20 757 H1460" stroke="#8a6f66" stroke-width="9" stroke-dasharray="14 30"/>
+    <rect x="0" y="775" width="1440" height="125" fill="#86c87a"/>
+    <g class="tbob"><use href="#train" x="510" y="735"/></g>
+    <path class="beam" d="M940 683 L1440 610 L1440 790Z" fill="#fff3b0"/>
+  </svg>
+  <div class="tint"></div><div class="alarm"></div><div class="rp" id="rp"></div>
+  <button id="rideClose" type="button">✕ Back to portfolio</button>
+  <div id="panel" class="panel" tabindex="-1"></div>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+
+  /* petals */
+  function petals(el,n){
+    if(reduce)return;
+    for(var i=0;i<n;i++){
+      var s=document.createElement('span');s.className='pt';
+      var w=10+Math.random()*10;
+      s.style.cssText='left:'+(Math.random()*100)+'%;width:'+w+'px;height:'+(w*.7)+'px;animation-duration:'+(9+Math.random()*9)+'s;animation-delay:'+(-Math.random()*16)+'s';
+      el.appendChild(s);
+    }
+  }
+  petals($('petals'),16);petals($('rp'),22);
+
+  /* stars for night */
+  (function(){
+    var g=$('stars'),ns='http://www.w3.org/2000/svg';
+    for(var i=0;i<34;i++){
+      var c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',Math.round(Math.random()*1440));c.setAttribute('cy',Math.round(30+Math.random()*380));
+      c.setAttribute('r',(.8+Math.random()*1.6).toFixed(1));c.setAttribute('fill','#fff');
+      g.appendChild(c);
+    }
+  })();
+
+  /* intro + typing */
+  var intro=$('intro'),typed=$('typed'),done=false,started=false,NAME='Kusuma Uppalapati..!';
+  function reveal(){var els=document.querySelectorAll('.reveal');for(var i=0;i<els.length;i++)els[i].classList.add('show')}
+  function type(){
+    if(started)return;started=true;
+    if(reduce){typed.textContent=NAME;reveal();return}
+    var n=0,t=setInterval(function(){n++;typed.textContent=NAME.slice(0,n);if(n>=NAME.length){clearInterval(t);setTimeout(reveal,250)}},85);
+  }
+  function endIntro(){
+    if(done)return;done=true;
+    if(intro&&intro.parentNode)intro.parentNode.removeChild(intro);
+    document.body.classList.remove('lock');type();
+  }
+  if(reduce){endIntro()}
+  else{typed.textContent='';setTimeout(endIntro,3300);intro.addEventListener('click',endIntro);document.addEventListener('keydown',function(){if(!done)endIntro()})}
+
+  /* the ride */
+  var ride=$('ride'),panel=$('panel'),page=$('page'),trainBtn=$('trainBtn');
+  var cur=0,tok=0,riding=false,lastFocus=null;
+  var GH='https://github.com/Kusuma447/vasavi-cafeteria-ui',LI='https://linkedin.com/in/kusuma-uppalapati',GP='https://github.com/Kusuma447';
+  var stops=[
+    {sky:'day',kicker:'ALL ABOARD',title:'Welcome to the Sakura Line 🌸',
+     body:'<p>You found the secret. This little train has five stops, and each one is a piece of how I think and build. No ticket needed.</p>',next:'Depart →'},
+    {sky:'day',kicker:'FLAGSHIP PROJECT',title:'Vasavi Cafeteria',
+     body:'<p>In first year I came back from sports and found the cafeteria closed. I got annoyed, then curious. Now I\'m building a canteen management app for my campus, from the interface down to the database.</p><ul class="st"><li><b class="live">● Live</b> Frontend on Vercel (HTML, CSS, JS)</li><li><b class="wip">● Building</b> Spring Boot backend and order database</li><li><b class="plan">● Planned</b> Payments</li></ul>',
+     links:[{t:'See the code',h:GH}],next:'Next stop →'},
+    {sky:'dusk',kicker:'SIGNAL FAILURE',title:'⚠ The train just stopped!',drill:true,
+     body:'<p class="note">This is a drill. Nothing is really broken. You get to play the human in the loop.</p><div id="dlog" class="mono" aria-live="polite"></div>'},
+    {sky:'dusk',kicker:'THE REAL THING',title:'That was a tiny Sentinel',
+     body:'<p>The drill you just ran is a mini version of <b>Sentinel</b>, an incident-response AI agent I built on Hindsight memory for Hack With Hyderabad 3.0. It learns from past incidents, proposes a fix, and never applies it until a human says yes.</p>',next:'Next stop →'},
+    {sky:'night',kicker:'WHY I BUILD',title:'I love knowing how things work',
+     body:'<p>What really happens between a click and a row in a database? That question locked me into backend engineering. Now I\'m exploring AI agents inside backend systems, so the boring, repetitive work can take care of itself.</p><p class="chips"><span>NLP-to-SQL chatbot</span><span>SkillSynth</span><span>Quiz Generator</span></p>',next:'Last stop →'},
+    {sky:'night',kicker:'END OF THE LINE',title:'You\'ve arrived 🌸',
+     body:'<p>Thanks for riding. If you\'re hiring for a backend internship, or want to build something, let\'s talk.</p>',
+     links:[{t:'LinkedIn',h:LI},{t:'GitHub',h:GP}],final:true}
+  ];
+  function dots(i){var h='';for(var k=1;k<=5;k++)h+='<span'+(k<=i?' class="on"':'')+'></span>';return h}
+  function btn(label,cls,fn){var b=document.createElement('button');b.type='button';b.className='pb '+(cls||'');b.textContent=label;b.addEventListener('click',fn);return b}
+  function render(i){
+    tok++;cur=i;var s=stops[i];
+    ride.setAttribute('data-sky',s.sky);ride.classList.remove('paused','alarmOn');
+    var head=i>0?'<div class="prog" aria-hidden="true">'+dots(i)+'</div><p class="kick mono">STOP '+i+' OF 5 · '+s.kicker+'</p>':'<p class="kick mono">'+s.kicker+'</p>';
+    panel.innerHTML=head+'<h2 id="rideTitle">'+s.title+'</h2><div class="pbody">'+s.body+'</div><div class="pact" id="pact"></div>';
+    var act=$('pact');
+    if(s.links)s.links.forEach(function(l){var a=document.createElement('a');a.className='pb alt';a.href=l.h;a.target='_blank';a.rel='noopener';a.textContent=l.t;act.appendChild(a)});
+    if(s.next)act.appendChild(btn(s.next,'',function(){render(cur+1)}));
+    if(s.final)act.appendChild(btn('Back to portfolio','',closeRide));
+    panel.scrollTop=0;
+    if(s.drill)runDrill();
+  }
+  async function runDrill(){
+    var my=tok,log=$('dlog'),act=$('pact');
+    ride.classList.add('paused','alarmOn');
+    function line(t,c){var d=document.createElement('div');d.className=c;d.textContent=t;log.appendChild(d);panel.scrollTop=panel.scrollHeight}
+    var L=[['ALERT · Signal failure ahead (pretend)','e',350],['Sentinel · Searching memory for similar incidents...','i',950],['Sentinel · Match found: "wires crossed at the sakura crossing"','i',950],['PROPOSED FIX · Reset the signal and reroute','o',850],['Sentinel never fixes things alone. Waiting for a human.','w',450]];
+    for(var i=0;i<L.length;i++){if(my!==tok)return;line(L[i][0],L[i][1]);await sleep(L[i][2])}
+    if(my!==tok)return;
+    var ok=btn('✅ Approve fix','go',async function(){
+      act.innerHTML='';
+      line('Human approved. Applying fix...','i');await sleep(850);
+      if(my!==tok)return;
+      line('Signal restored. Back on track 🚆','o');
+      ride.classList.remove('paused','alarmOn');
+      await sleep(600);if(my!==tok)return;
+      act.appendChild(btn('Next stop →','',function(){render(cur+1)}));
+    });
+    act.appendChild(ok);ok.focus();
+  }
+  function openRide(){
+    if(riding||!done)return;riding=true;lastFocus=document.activeElement;
+    document.body.classList.add('depart');
+    setTimeout(function(){
+      ride.classList.add('open');void ride.offsetWidth;ride.classList.add('show');
+      page.inert=true;render(0);panel.focus();
+    },reduce?0:850);
+  }
+  function closeRide(){
+    if(!riding)return;tok++;
+    ride.classList.remove('show');page.inert=false;
+    setTimeout(function(){ride.classList.remove('open','paused','alarmOn');document.body.classList.remove('depart');riding=false},reduce?0:500);
+    var f=(lastFocus&&lastFocus.focus)?lastFocus:trainBtn;try{f.focus()}catch(e){}
+  }
+  trainBtn.addEventListener('click',openRide);
+  trainBtn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openRide()}});
+  $('secret').addEventListener('click',openRide);
+  $('rideClose').addEventListener('click',closeRide);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeRide()});
+})();
+</script>
+</body>
+</html>
